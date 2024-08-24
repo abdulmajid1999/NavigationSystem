@@ -1,0 +1,33 @@
+﻿@model NavigationItemViewModel
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Create Navigation Item</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ParentId" class="control-label">Parent</label>
+        <select asp-for="ParentId" class="form-control">
+            <option value="">None</option>
+            @foreach (var item in Model.ParentItems)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+        <span asp-validation-for="ParentId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
